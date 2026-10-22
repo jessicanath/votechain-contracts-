@@ -582,6 +582,58 @@ votechain-contracts/
 - **Stellar Docs:** [developers.stellar.org/docs/smart-contracts](https://developers.stellar.org/docs/smart-contracts)
 - **Soroban Examples:** [github.com/stellar/soroban-examples](https://github.com/stellar/soroban-examples)
 
+## Troubleshooting
+
+### Top 10 Common Errors
+
+1. **Wrong Rust version**
+   - Error: `error: package requires rustc 1.78.0 or newer`
+   - Fix: `rustup update stable && rustup default stable`
+
+2. **Stellar CLI version mismatch**
+   - Error: `stellar: command not found` or `error: unknown command`
+   - Fix: `cargo install --locked stellar-cli --features opt`
+
+3. **WASM target missing**
+   - Error: `error[E0463]: can't find crate for core (target wasm32-unknown-unknown)`
+   - Fix: `rustup target add wasm32-unknown-unknown`
+
+4. **Docker networking issues**
+   - Error: `Cannot connect to the Docker daemon`
+   - Fix: Start Docker service; on Linux `sudo systemctl start docker`
+
+5. **Port already in use**
+   - Error: `bind: address already in use`
+   - Fix: Stop conflicting process or change port in `.env`
+
+6. **Missing .env file**
+   - Error: `ENOENT: no such file or directory, open '.env'`
+   - Fix: `cp .env.example .env`
+
+7. **Node version mismatch**
+   - Error: `engine "node" is incompatible`
+   - Fix: Use nvm: `nvm use 20`
+
+8. **Cargo lock out of date**
+   - Error: `the lock file needs to be updated`
+   - Fix: `cargo update` then rebuild
+
+9. **Permission denied on scripts**
+   - Error: `Permission denied`
+   - Fix: `chmod +x scripts/*.sh`
+
+10. **CI failure: lint**
+    - Error: `clippy::...` warnings as errors
+    - Fix: Run `cargo clippy -- -D warnings` locally
+
+### Environments
+
+- **Local**: ensure Rust, Stellar CLI, Node installed.
+- **Docker**: check daemon and network.
+- **CI**: match toolchain versions in workflow.
+
+See also [FAQ](faq.md).
+
 ## Next Steps
 
 Now that you're set up:
